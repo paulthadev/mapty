@@ -13,3 +13,15 @@ const inputElevation = document.querySelector(".form__input--elevation");
 
 const copyDate = document.querySelector(".copyright-year");
 copyDate.textContent = new Date().getUTCFullYear();
+
+// Geolocation API
+if (navigator.geolocation) {
+  navigator.geolocation.getCurrentPosition(
+    function (position) {
+      console.log(position);
+    },
+    function () {
+      alert("Could not get your position");
+    }
+  );
+}
