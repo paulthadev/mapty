@@ -14,6 +14,8 @@ const inputElevation = document.querySelector(".form__input--elevation");
 const copyDate = document.querySelector(".copyright-year");
 copyDate.textContent = new Date().getUTCFullYear();
 
+let map, mapEvent;
+
 // Geolocation API
 if (navigator.geolocation) {
   navigator.geolocation.getCurrentPosition(
@@ -25,31 +27,19 @@ if (navigator.geolocation) {
       const coords = [latitude, longitude];
 
       // leaflet API
-      const map = L.map("map").setView(coords, 13);
+      map = L.map("map").setView(coords, 13);
 
       L.tileLayer("https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png", {
         attribution:
           '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
       }).addTo(map);
 
-      map.on("click", function (mapevent) {
-        console.log(mapevent);
-        const { lat, lng } = mapevent.latlng;
+      // Handling clicks on map
+      map.on("click", function (mapE) {
+        mapEvent = mapE;
 
-        L.marker([lat, lng])
-          .addTo(map)
-          .bindPopup(
-            L.popup({
-              maxWidth: 200,
-              minWidth: 50,
-              autoClose: false,
-              closeOnClick: false,
-              autoPan: true,
-              className: "running-popup",
-            })
-          )
-          .setPopupContent("Workout")
-          .openPopup();
+        form.classList.remove("hidden");
+        inputDistance.focus();
       });
     },
     function () {
@@ -57,3 +47,25 @@ if (navigator.geolocation) {
     }
   );
 }
+
+form.addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  // display the marker
+  console.log(mapEvent);
+  const { lat, lng } = mapEvent.latlng;
+  L.marker([lat, lng])
+    .addTo(map)
+    .bindPopup(
+      L.popup({
+        maxWidth: 200,
+        minWidth: 50,
+        autoClose: false,
+        closeOnClick: false,
+        autoPan: true,
+        className: "running-popup",
+      })
+    )
+    .setPopupContent("Workout")
+    .openPopup();
+});
