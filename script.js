@@ -38,6 +38,7 @@ if (navigator.geolocation) {
       map.on("click", function (mapE) {
         mapEvent = mapE;
 
+        // display the form
         form.classList.remove("hidden");
         inputDistance.focus();
       });
@@ -50,6 +51,13 @@ if (navigator.geolocation) {
 
 form.addEventListener("submit", function (e) {
   e.preventDefault();
+
+  // clear input fields
+  inputDistance.value =
+    inputDuration.value =
+    inputElevation.value =
+    inputCadence.value =
+      "";
 
   // display the marker
   console.log(mapEvent);
@@ -68,4 +76,10 @@ form.addEventListener("submit", function (e) {
     )
     .setPopupContent("Workout")
     .openPopup();
+});
+
+// toggle elevation and cadence on the form type
+inputType.addEventListener("change", function () {
+  inputElevation.closest(".form__row").classList.toggle("form__row--hidden");
+  inputCadence.closest(".form__row").classList.toggle("form__row--hidden");
 });
