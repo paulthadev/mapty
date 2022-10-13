@@ -16,7 +16,7 @@
 <br>
 
 <h3 align="center"> 
-	Application status: In-Progress ⚠️
+	Application status: Completed ✅
 </h3>
 <br>
 
