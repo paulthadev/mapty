@@ -1,7 +1,5 @@
 "use strict";
 
-const copyDate = document.querySelector(".copyright-year");
-
 class Workout {
   date = new Date();
   id = (Date.now() + "").slice(-10);
@@ -70,6 +68,7 @@ const inputDistance = document.querySelector(".form__input--distance");
 const inputDuration = document.querySelector(".form__input--duration");
 const inputCadence = document.querySelector(".form__input--cadence");
 const inputElevation = document.querySelector(".form__input--elevation");
+const copyDate = document.querySelector(".copyright-year");
 
 class App {
   #map;
@@ -77,7 +76,15 @@ class App {
   #mapEvent;
   #workout = [];
   constructor() {
+    // get users position
     this.#getPosition();
+
+    // get data from local storage
+    this.#getLocalStorage();
+
+    // Attach event listeners
+
+    //
     form.addEventListener("submit", this.#newWorkout.bind(this));
 
     // toggle elevation and cadence on the form type
@@ -85,6 +92,9 @@ class App {
 
     // move to popup
     containerWorkouts.addEventListener("click", this.#moveToPopup.bind(this));
+
+    // copyright date
+    copyDate.textContent = new Date().getUTCFullYear();
   }
 
   #getPosition() {
@@ -115,6 +125,10 @@ class App {
 
     // Handling clicks on map
     this.#map.on("click", this.#showForm.bind(this));
+
+    this.#workout.forEach((work) => {
+      this.#renderWorkoutMarker(work);
+    });
   }
 
   #showForm(mapE) {
@@ -194,6 +208,9 @@ class App {
 
     // Hide form + clear input fields
     this.#hideForm();
+
+    // set local storage to all workouts
+    this.#setLocalStorage();
   }
 
   #renderWorkoutMarker(workout) {
@@ -285,9 +302,22 @@ class App {
     // using public interface
     workout.click();
   }
+
+  #setLocalStorage() {
+    localStorage.setItem("workouts", JSON.stringify(this.#workout));
+  }
+
+  #getLocalStorage() {
+    const data = JSON.parse(localStorage.getItem("workouts"));
+
+    if (!data) return;
+
+    this.#workout = data;
+
+    this.#workout.forEach((work) => {
+      this.#renderWorkout(work);
+    });
+  }
 }
 
 const app = new App();
-
-// copyright date
-copyDate.textContent = new Date().getUTCFullYear();
