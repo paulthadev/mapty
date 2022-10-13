@@ -28,7 +28,7 @@
 
 ## About
 
-This project was developed for educational & training purposes. In this app, track your running / cycling workouts with live locations. Measured in distance, time, pace, and steps/minute. You can also access looged workouts at a glance at the sidebar of the App. Build with JavaScript, OOP, HTML, CSS.
+This project was developed for educational & training purposes. In this app, track your running / cycling workouts with live locations. Measured in distance, time, pace, and steps/minute. You can also access logged workouts at a glance at the sidebar of the App. Build with JavaScript, OOP, HTML, CSS.
 
 ## :rocket: Technologies used:
 
