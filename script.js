@@ -300,7 +300,7 @@ class App {
     });
 
     // using public interface
-    workout.click();
+    // workout.click();
   }
 
   #setLocalStorage() {
