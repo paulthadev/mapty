@@ -270,7 +270,7 @@ class App {
       html += `
       <div class="workout__details">
       <span class="workout__icon">⚡️</span>
-      <span class="workout__value">${workout.speed}</span>
+      <span class="workout__value">${workout.speed.toFixed(1)}</span>
       <span class="workout__unit">km/h</span>
     </div>
     <div class="workout__details">
@@ -317,6 +317,11 @@ class App {
     this.#workout.forEach((work) => {
       this.#renderWorkout(work);
     });
+  }
+
+  reset() {
+    localStorage.removeItem("workouts");
+    location.reload();
   }
 }
 
