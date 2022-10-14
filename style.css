@@ -216,7 +216,9 @@ a:visited {
 /*  944px    that is 944/16=59em */
 @media (max-width: 59em) {
   html {
-    font-size: 60%;
+    /* 8px / 16px */
+    /* font-size: 50%; */
+    font-size: 55%;
   }
 
   body {
@@ -239,13 +241,16 @@ a:visited {
   .form__btn {
     grid-column: 1/-1;
     display: inline-block;
+    /* display: inline-block; */
     border-radius: 0.2rem;
     border: none;
     cursor: pointer;
+    /* background-color: #00c46a; */
   }
   .form {
     gap: 1.5rem 2.5rem;
     height: 13.25rem;
+    /* width: 82rem; */
   }
   .form__label {
     font-size: 1.7rem;
@@ -284,7 +289,7 @@ a:visited {
 
 @media (max-width: 31em) {
   html {
-    font-size: 55%;
+    font-size: 45%;
   }
   .workouts {
     height: 34vh;
