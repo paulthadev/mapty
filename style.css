@@ -209,3 +209,130 @@ a:visited {
 .cycling-popup .leaflet-popup-content-wrapper {
   border-left: 5px solid var(--color-brand--1);
 }
+
+/* /////////////////////////////////////////// */
+
+/* BELOW 59*16= 944PX ( TABLETS)
+/*  944px    that is 944/16=59em */
+@media (max-width: 59em) {
+  html {
+    font-size: 60%;
+  }
+
+  body {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    /* flex-direction: column; */
+  }
+  .sidebar {
+    padding: 3rem 4rem 4rem 4rem;
+    border-bottom-left-radius: 0.5rem;
+    border-top-left-radius: 0.5rem;
+    box-shadow: 2px 1px 0.6rem;
+  }
+  .logo {
+    height: 7.2rem;
+    align-self: center;
+    margin-bottom: 5rem;
+  }
+
+  .form__btn {
+    grid-column: 1/-1;
+    display: inline-block;
+    border-radius: 0.2rem;
+    border: none;
+    cursor: pointer;
+  }
+  .form {
+    gap: 1.5rem 2.5rem;
+    height: 13.25rem;
+  }
+  .form__label {
+    font-size: 1.7rem;
+  }
+  .form__input {
+    font-size: 1.5rem;
+  }
+
+  .workouts {
+    height: 29vh;
+  }
+  .copyright {
+    display: none;
+  }
+  .copyright-mobile {
+    display: block;
+    margin-top: auto;
+    font-size: 1.3rem;
+    text-align: center;
+    color: var(--color-light--1);
+  }
+  .form__btn {
+    grid-column: 1/-1;
+  }
+}
+
+#map {
+  /* border: 0.6rem solid #42484d; */
+  box-shadow: 0px 1px 0.2rem #2d3439;
+}
+
+/* *************************8 */
+/* BELOW 28*16= 445PX ( phones)
+/* **************************8 */
+/*  445px    that is 445/16=28em */
+
+@media (max-width: 31em) {
+  html {
+    font-size: 55%;
+  }
+  .workouts {
+    height: 34vh;
+  }
+  .logo {
+    height: 6.1rem;
+  }
+
+  .form {
+    padding: 1.5rem 1.75rem;
+  }
+
+  .form__btn {
+    display: block;
+  }
+}
+
+/* *************************8 */
+/* BELOW 22*16= 350PX ( phones)
+/* **************************8 */
+/*  350px    that is 350/16=22em */
+
+@media (max-width: 22em) {
+  html {
+    font-size: 38%;
+  }
+  .sidebar {
+    padding: 3rem 1rem 2rem 1rem;
+  }
+  .form__input {
+    font-size: 1.8rem;
+  }
+  .form__label {
+    font-size: 1.7rem;
+  }
+  .workout__title {
+    font-size: 2rem;
+  }
+  .workout__icon {
+    font-size: 1.8rem;
+  }
+  .workout__value {
+    font-size: 1.7rem;
+  }
+  .workout__unit {
+    font-size: 1.2rem;
+  }
+  .workouts {
+    height: 35vh;
+  }
+}
