@@ -185,6 +185,8 @@ a:visited {
   flex: 1;
   height: 100%;
   background-color: var(--color-light--1);
+
+  box-shadow: 0px 1px 0.2rem #2d3439;
 }
 
 /* Popup width is defined in JS using options */
@@ -216,15 +218,12 @@ a:visited {
 /*  944px    that is 944/16=59em */
 @media (max-width: 59em) {
   html {
-    /* 8px / 16px */
-    /* font-size: 50%; */
-    font-size: 55%;
+    font-size: 50%;
   }
 
   body {
     display: grid;
     grid-template-rows: 1fr 1fr;
-    /* flex-direction: column; */
   }
   .sidebar {
     padding: 3rem 4rem 4rem 4rem;
@@ -247,14 +246,17 @@ a:visited {
     cursor: pointer;
     /* background-color: #00c46a; */
   }
+
   .form {
     gap: 1.5rem 2.5rem;
     height: 13.25rem;
     /* width: 82rem; */
   }
+
   .form__label {
     font-size: 1.7rem;
   }
+
   .form__input {
     font-size: 1.5rem;
   }
@@ -262,9 +264,11 @@ a:visited {
   .workouts {
     height: 29vh;
   }
+
   .copyright {
     display: none;
   }
+
   .copyright-mobile {
     display: block;
     margin-top: auto;
@@ -272,20 +276,32 @@ a:visited {
     text-align: center;
     color: var(--color-light--1);
   }
+
   .form__btn {
     grid-column: 1/-1;
   }
 }
 
-#map {
-  /* border: 0.6rem solid #42484d; */
-  box-shadow: 0px 1px 0.2rem #2d3439;
+/* BELOW 33*16= = 528PX (phones) */
+/*  528px that is 528/16=33em */
+
+@media (max-width: 33em) {
+  body {
+    display: grid;
+    grid-template-rows: 1fr 2fr;
+  }
+  .sidebar {
+    height: 39vh;
+  }
+  option {
+    font-size: 0.8em;
+  }
 }
 
-/* *************************8 */
+/* **************************/
 /* BELOW 28*16= 445PX ( phones)
-/* **************************8 */
-/*  445px    that is 445/16=28em */
+/* ************************** */
+/*  445px that is 445/16=28em */
 
 @media (max-width: 31em) {
   html {
@@ -305,12 +321,16 @@ a:visited {
   .form__btn {
     display: block;
   }
+
+  option {
+    font-size: 0.8em;
+  }
 }
 
-/* *************************8 */
+/* ************************* */
 /* BELOW 22*16= 350PX ( phones)
-/* **************************8 */
-/*  350px    that is 350/16=22em */
+/* ************************** */
+/*  350px that is 350/16=22em */
 
 @media (max-width: 22em) {
   html {
@@ -339,5 +359,8 @@ a:visited {
   }
   .workouts {
     height: 35vh;
+  }
+  option {
+    font-size: 0.8em;
   }
 }
