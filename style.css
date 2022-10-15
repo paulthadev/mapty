@@ -212,6 +212,10 @@ a:visited {
   border-left: 5px solid var(--color-brand--1);
 }
 
+.workout-edit {
+  float: right;
+  margin-left: 4%;
+}
 /* /////////////////////////////////////////// */
 
 /* BELOW 59*16= 944PX ( TABLETS)
