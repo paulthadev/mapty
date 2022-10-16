@@ -34,14 +34,19 @@ This project was developed for educational & training purposes. In this app, tra
 
 ## How to use
 
-1. You can choose any point or location you want to start a workout on the map and choose between running or cycling.
+1. Click on the map to select apoint or location for the workout, you can choose between running or cycling on the form.
 
-2. In order to submit the workout, you needs to fill out several details like distance, duration, cadence or elevation. ( for iphone users: you can submit by pressing the return button after filling all details)
-   (for andriod users: Just press the go button after filling all details)
+2. In order to submit the workout, you needs to fill out all details (distance, duration, cadence or elevation)
 
-3. All the workout will be saved after submitting.
+- for iphone users: you can submit by pressing the return button after filling all details.
 
-4. You can also be able to find all your saved workout listed on the sidebar. The list contains workout details like pace, cadence, duration, speed as well as the date of the workout. If you reloads the page, all the data will be still saved.
+- for andriod users: Just press the go button after filling all details.
+
+3. All the submitted workout will be displayed and saved on the sidebar.
+
+4. The list contains workout details of each workout type, as well as the date of the workout.
+
+5. You can also delete workout data.
 
 ## :rocket: Technologies used:
 
