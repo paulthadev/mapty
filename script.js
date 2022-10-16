@@ -245,12 +245,13 @@ class App {
             </i>
           </span>
 
-          <span class="workout-edit">
+        <!--  <span class="workout-edit">
             <i class="fa-solid fa-pen-to-square edit__icon" data-id = "${
               workout.id
             }">
             </i>
           </span>
+          -->
       
       </h2>
       <div class="workout__details">
