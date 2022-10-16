@@ -312,7 +312,6 @@ class App {
     this.#workout = deleteWorkouts;
 
     this.#setLocalStorage();
-    this.#getLocalStorage();
     location.reload();
   }
 
