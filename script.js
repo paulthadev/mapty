@@ -68,6 +68,7 @@ const inputDistance = document.querySelector(".form__input--distance");
 const inputDuration = document.querySelector(".form__input--duration");
 const inputCadence = document.querySelector(".form__input--cadence");
 const inputElevation = document.querySelector(".form__input--elevation");
+
 const copyDate = document.querySelector(".copyright-year");
 
 class App {
@@ -92,6 +93,8 @@ class App {
 
     // move to popup
     containerWorkouts.addEventListener("click", this.#moveToPopup.bind(this));
+
+    containerWorkouts.addEventListener("click", this.#deleteWorkout.bind(this));
 
     // copyright date
     copyDate.textContent = new Date().getUTCFullYear();
@@ -238,12 +241,14 @@ class App {
     <li class="workout workout--${workout.type}" data-id="${workout.id}">
       <h2 class="workout__title">${workout.description}
       <span class="workout-edit">
-            <i class="fa-solid fa-trash delete-icon data-id=">
+            <i class="fa-solid fa-trash delete__icon" data-id="${workout.id}">
             </i>
           </span>
 
           <span class="workout-edit">
-            <i class="fa-solid fa-pen-to-square edit-icon ">
+            <i class="fa-solid fa-pen-to-square edit__icon" data-id = "${
+              workout.id
+            }">
             </i>
           </span>
       
@@ -293,6 +298,22 @@ class App {
      `;
 
     form.insertAdjacentHTML("afterend", html);
+  }
+
+  #deleteWorkout(e) {
+    const deleteEl = e.target.closest(".delete__icon");
+    if (!deleteEl) return;
+
+    const deleteWorkouts = this.#workout.filter(function (list) {
+      return list.id !== deleteEl.dataset.id;
+    });
+
+    localStorage.removeItem("workouts");
+    this.#workout = deleteWorkouts;
+
+    this.#setLocalStorage();
+    this.#getLocalStorage();
+    location.reload();
   }
 
   #moveToPopup(e) {
