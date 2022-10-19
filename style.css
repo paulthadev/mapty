@@ -24,6 +24,8 @@ html {
 }
 
 body {
+  display: flex;
+  /* justify-content: center; */
   font-family: "Manrope", sans-serif;
   color: var(--color-light--2);
   font-weight: 400;
@@ -32,9 +34,7 @@ body {
   overscroll-behavior-y: none;
 
   background-color: var(--color-dark--2);
-  padding: 1rem;
-
-  display: flex;
+  /* padding: 0rem; */
 }
 
 /* GENERAL */
