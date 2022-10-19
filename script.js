@@ -85,8 +85,11 @@ class App {
 
     // Attach event listeners
 
-    //
+    // new workout form
     form.addEventListener("submit", this.#newWorkout.bind(this));
+
+    // submit edited workout form
+    form.addEventListener("submit", this.#submitWorkout.bind(this));
 
     // toggle elevation and cadence on the form type
     inputType.addEventListener("change", this.#toggleElevationField);
@@ -94,7 +97,11 @@ class App {
     // move to popup
     containerWorkouts.addEventListener("click", this.#moveToPopup.bind(this));
 
+    // delete element icon
     containerWorkouts.addEventListener("click", this.#deleteWorkout.bind(this));
+
+    // edit element icon
+    containerWorkouts.addEventListener("click", this.#editWorkouts.bind(this));
 
     // copyright date
     copyDate.textContent = new Date().getUTCFullYear();
@@ -114,7 +121,6 @@ class App {
   #loadMap(position) {
     const { latitude } = position.coords;
     const { longitude } = position.coords;
-    console.log(`https://www.google.com/maps/@${latitude},${longitude},17z`);
 
     const coords = [latitude, longitude];
 
@@ -245,13 +251,13 @@ class App {
             </i>
           </span>
 
-        <!--  <span class="workout-edit">
+        <span class="workout-edit">
             <i class="fa-solid fa-pen-to-square edit__icon" data-id = "${
               workout.id
             }">
             </i>
           </span>
-          -->
+          
       
       </h2>
       <div class="workout__details">
@@ -313,7 +319,99 @@ class App {
     this.#workout = deleteWorkouts;
 
     this.#setLocalStorage();
-    location.reload();
+    this.#resetElement();
+    this.#updateWorkouts(this.#workout);
+  }
+
+  #editWorkouts(e) {
+    const editEl = e.target.closest(".edit__icon");
+    if (!editEl) return;
+
+    const workoutData = this.#workout.find(
+      (work) => work.id === editEl.dataset.id
+    );
+
+    this.workoutId = workoutData.id;
+
+    inputType.value = workoutData.type;
+    inputDistance.value = workoutData.distance;
+    inputDuration.value = workoutData.duration;
+    if (workoutData.type === "running") {
+      inputElevation.closest(".form__row").classList.add("form__row--hidden");
+      inputCadence.closest(".form__row").classList.remove("form__row--hidden");
+      inputCadence.value = workoutData.cadence;
+    }
+    if (workoutData.type === "cycling") {
+      inputCadence.closest(".form__row").classList.add("form__row--hidden");
+      inputElevation
+        .closest(".form__row")
+        .classList.remove("form__row--hidden");
+      inputElevation.value = workoutData.elevation;
+    }
+
+    if (editEl) {
+      this.#showForm();
+    }
+
+    inputType.setAttribute("disabled", "true");
+  }
+
+  #submitWorkout(e) {
+    e.preventDefault();
+    if (!this.workoutId) return;
+    const validInputs = (...inputs) =>
+      inputs.every((inp) => Number.isFinite(inp));
+    const allPositive = (...inputs) => inputs.every((inp) => inp > 0);
+    const id = this.workoutId;
+    const editworkouts = this.#workout.find((work) => work.id === id);
+    if (!inputDistance.value) {
+      return;
+    }
+    const distance = +inputDistance.value;
+    const duration = +inputDuration.value;
+    if (editworkouts.type === "running") {
+      const cadence = +inputCadence.value;
+      if (
+        !validInputs(distance, duration, cadence) ||
+        !allPositive(distance, duration, cadence)
+      ) {
+        return alert("Inputs have to be positive numbers");
+      }
+      editworkouts.distance = distance;
+      editworkouts.duration = duration;
+      editworkouts.cadence = cadence;
+      function calcPace(duration, distance) {
+        // min/km
+        const pace = duration / distance;
+        return pace;
+      }
+      editworkouts.pace = calcPace(duration, distance);
+    }
+    if (editworkouts.type === "cycling") {
+      const elevation = +inputElevation.value;
+      if (
+        !validInputs(distance, duration, elevation) ||
+        !allPositive(distance, duration, elevation)
+      ) {
+        return alert("Inputs have to be positive numbers");
+      }
+      editworkouts.distance = distance;
+      editworkouts.duration = duration;
+      editworkouts.elevation = elevation;
+      function calcSpeed(distance, duration) {
+        // km/hr
+        const speed = distance / duration / 60;
+        return speed;
+      }
+      editworkouts.speed = calcSpeed(distance, duration);
+    }
+
+    localStorage.removeItem("workouts");
+    this.#setLocalStorage();
+    this.#resetElement();
+    this.#updateWorkouts(this.#workout);
+    this.#hideForm();
+    this.workoutId = undefined;
   }
 
   #moveToPopup(e) {
@@ -348,6 +446,38 @@ class App {
 
     this.#workout.forEach((work) => {
       this.#renderWorkout(work);
+    });
+  }
+
+  #resetElement() {
+    const restoredElement = document.querySelectorAll(".workout");
+    const restoredPopup = document.querySelectorAll(".leaflet-popup");
+    const restoredMarker = document.querySelectorAll(".leaflet-marker-icon");
+    const restoredShadow = document.querySelectorAll(".leaflet-marker-shadow");
+    const restoredBoundary = document.querySelectorAll(".boundary_line");
+
+    restoredElement.forEach((element) => {
+      element.remove();
+    });
+    restoredBoundary.forEach((element) => {
+      element.remove();
+    });
+    restoredPopup.forEach((popup) => {
+      popup.remove();
+    });
+    restoredMarker.forEach((marker) => {
+      marker.remove();
+    });
+    restoredShadow.forEach((shadow) => {
+      shadow.remove();
+    });
+  }
+
+  //Repopulating Workouts
+  #updateWorkouts(workout) {
+    workout.forEach((workout) => {
+      this.#renderWorkout(workout);
+      this.#renderWorkoutMarker(workout);
     });
   }
 
