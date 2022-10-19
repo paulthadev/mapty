@@ -60,7 +60,7 @@ class Cycling extends Workout {
 
 ///////////////////////////////////////////////////
 // APPLICATION ARCHITECTURE
-
+const sidebar = document.querySelector(".sidebar");
 const form = document.querySelector(".form");
 const containerWorkouts = document.querySelector(".workouts");
 const inputType = document.querySelector(".form__input--type");
@@ -68,6 +68,7 @@ const inputDistance = document.querySelector(".form__input--distance");
 const inputDuration = document.querySelector(".form__input--duration");
 const inputCadence = document.querySelector(".form__input--cadence");
 const inputElevation = document.querySelector(".form__input--elevation");
+const resetAll = document.querySelector(".reset__all");
 
 const copyDate = document.querySelector(".copyright-year");
 
@@ -84,7 +85,6 @@ class App {
     this.#getLocalStorage();
 
     // Attach event listeners
-
     // new workout form
     form.addEventListener("submit", this.#newWorkout.bind(this));
 
@@ -102,6 +102,9 @@ class App {
 
     // edit element icon
     containerWorkouts.addEventListener("click", this.#editWorkouts.bind(this));
+
+    // reset all workout icon
+    sidebar.addEventListener("click", this.#resetAll.bind(this));
 
     // copyright date
     copyDate.textContent = new Date().getUTCFullYear();
@@ -220,6 +223,9 @@ class App {
 
     // set local storage to all workouts
     this.#setLocalStorage();
+
+    // show reset button
+    resetAll.classList.remove("hidden");
   }
 
   #renderWorkoutMarker(workout) {
@@ -247,12 +253,14 @@ class App {
     <li class="workout workout--${workout.type}" data-id="${workout.id}">
       <h2 class="workout__title">${workout.description}
       <span class="workout-edit">
-            <i class="fa-solid fa-trash delete__icon" data-id="${workout.id}">
+            <i title="delete" class="fa-solid fa-trash delete__icon" data-id="${
+              workout.id
+            }">
             </i>
           </span>
 
         <span class="workout-edit">
-            <i class="fa-solid fa-pen-to-square edit__icon" data-id = "${
+            <i title="edit" class="fa-solid fa-pen-to-square edit__icon" data-id = "${
               workout.id
             }">
             </i>
@@ -305,6 +313,7 @@ class App {
      `;
 
     form.insertAdjacentHTML("afterend", html);
+    resetAll.classList.remove("hidden");
   }
 
   #deleteWorkout(e) {
@@ -406,7 +415,7 @@ class App {
 
       if (
         !validInputs(distance, duration, elevation) ||
-        !allPositive(distance, duration, elevation)
+        !allPositive(distance, duration)
       ) {
         return alert("Inputs have to be positive numbers");
       }
@@ -489,6 +498,8 @@ class App {
     restoredShadow.forEach((shadow) => {
       shadow.remove();
     });
+
+    this.#checkEmpty();
   }
 
   //Repopulating Workouts
@@ -499,10 +510,20 @@ class App {
     });
   }
 
-  reset() {
+  #resetAll(e) {
+    const resetIcon = e.target.closest(".reset__all");
+    if (!resetIcon) return;
+
     localStorage.removeItem("workouts");
-    location.reload();
+    if (window.confirm("⛔ reset all workouts ⛔")) {
+      location.reload();
+    }
+  }
+
+  #checkEmpty() {
+    if (this.#workout === []) {
+      resetAll.classList.add("hidden");
+    }
   }
 }
-
 const app = new App();
