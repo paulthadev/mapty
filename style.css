@@ -6,7 +6,10 @@
   --color-dark--2: #42484d;
   --color-light--1: #aaa;
   --color-light--2: #ececec;
-  --color-light--3: rgb(214, 222, 224);
+  --color-light--3: #d6dee0;
+
+  --color-warning--1: #e95842;
+  --color-changes--1: #42a9e9;
 }
 
 * {
@@ -29,7 +32,7 @@ body {
   overscroll-behavior-y: none;
 
   background-color: #fff;
-  padding: 2.5rem;
+  padding: 1.5rem;
 
   display: flex;
 }
@@ -88,6 +91,7 @@ a:visited {
   font-size: 1.7rem;
   font-weight: 600;
   grid-column: 1 / -1;
+  color: var(--color-light--2);
 }
 
 .workout__details {
@@ -175,6 +179,7 @@ a:visited {
 
 .copyright {
   margin-top: auto;
+  padding-top: 1.5rem;
   font-size: 1.3rem;
   text-align: center;
   color: var(--color-light--1);
@@ -216,6 +221,44 @@ a:visited {
   float: right;
   margin-left: 4%;
 }
+
+.fa-trash {
+  transition: all 0.3s ease;
+}
+.fa-trash:hover {
+  color: var(--color-warning--1);
+}
+
+.fa-pen-to-square {
+  transition: all 0.3s ease;
+}
+
+.fa-pen-to-square:hover {
+  color: var(--color-changes--1);
+}
+
+.reset__all {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.reset__all.hidden {
+  display: none;
+}
+
+.fa-power-off {
+  color: var(--color-brand--1);
+  font-size: 1.5rem;
+  background-color: var(--color-dark--2);
+  padding: 1rem;
+  border-radius: 30%;
+  margin-bottom: 0.5rem;
+  transition: all 0.3s ease;
+}
+.fa-power-off:hover {
+  color: var(--color-warning--1);
+}
+
 /* /////////////////////////////////////////// */
 
 /* BELOW 59*16= 944PX ( TABLETS)
@@ -269,9 +312,9 @@ a:visited {
     height: 29vh;
   }
 
-  .copyright {
+  /* .copyright {
     display: none;
-  }
+  } */
 
   .copyright-mobile {
     display: block;
@@ -295,10 +338,15 @@ a:visited {
     grid-template-rows: 1fr 2fr;
   }
   .sidebar {
-    height: 39vh;
+    height: 40vh;
+    padding-bottom: 0.5rem;
   }
   option {
     font-size: 0.8em;
+  }
+  .logo {
+    height: 6.1rem;
+    margin-bottom: 0rem;
   }
 }
 
@@ -316,6 +364,7 @@ a:visited {
   }
   .logo {
     height: 6.1rem;
+    margin-bottom: 1.5rem;
   }
 
   .form {
@@ -341,7 +390,7 @@ a:visited {
     font-size: 38%;
   }
   .sidebar {
-    padding: 3rem 1rem 2rem 1rem;
+    padding: 3rem 1rem 0.5rem 1rem;
   }
   .form__input {
     font-size: 1.8rem;
