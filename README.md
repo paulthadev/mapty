@@ -22,7 +22,8 @@
 
 # 👀 Important
 
-### <p> 🔑 take a look </p> ➡️ https://fadayopaul.github.io/mapty/
+### <p> 🔑 Take a look  ➡️ [ Click Here](https://maptytrack.netlify.app) </p>
+[![Netlify Status](https://api.netlify.com/api/v1/badges/19d9d1b6-85f4-4de2-a1fa-445c134fe861/deploy-status)](https://app.netlify.com/sites/maptytrack/deploys)
 
 <br>
 
