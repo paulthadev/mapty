@@ -58,7 +58,7 @@ This project was developed for educational & training purposes. In this app, tra
 
 ## :information_source: Application installation
 
-- `https://github.com/fadayopaul/mapty.git` to clone the repository
+- `https://github.com/paulthadev/mapty.git` to clone the repository
 
 <br>
 
